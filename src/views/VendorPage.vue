@@ -1,18 +1,26 @@
 <template>
-    
+
 </template>
 
 <script>
 export default {
     created(){
-        fetch("localhost:8000/api/vendor/630377215ea36953f62f8091")
+        fetch("http://localhost:8000/vendor/login", {
+            method: "post",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                email: "me@leemorgan.io",
+                password: "leerobertmorgan"
+            })
+        })
             .then(r=>r.json())
-            .then((vendor)=>{
-                console.log(vendor);
+            .then((r)=>{
             })
             .catch((err)=>{
                 console.error(err);
-            });
+            })
     }
 }
 </script>
