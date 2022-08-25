@@ -1,6 +1,16 @@
 <template>
     <div class="landingPage">
-        <vendor-register v-if="modals.vendorReg" @closeModal="closeModal"></vendor-register>
+        <vendor-register
+            v-if="modals.vendorReg"
+            @closeModal="closeModal"
+            @banner="showBanner"
+        ></vendor-register>
+
+        <notification-banner
+            v-show="banner.displayed"
+            :type="banner.type"
+            :message="banner.message"
+        ></notification-banner>
 
         <button class="loginReg" @click="displayRegister">Register</button>
 
@@ -11,8 +21,6 @@
         <p>Shop Local</p>
 
         <p>Buy Local</p>
-
-        <RouterLink class="actionButton" to="/second">Search Locally</RouterLink>
     </div>
 </template>
 
@@ -22,6 +30,11 @@ export default {
         return {
             modals: {
                 vendorReg: false
+            },
+            banner: {
+                displayed: false,
+                type: "",
+                message: ""
             }
         }
     },
@@ -31,6 +44,16 @@ export default {
         },
         closeModal: function(){
             this.modals.vendorReg = false
+        },
+        showBanner: function(type, message){
+            this.banner.type = type;
+            this.banner.message = message;
+            this.banner.displayed = true;
+
+            setTimeout(this.hideBanner, 5000);
+        },
+        hideBanner: function(){
+            this.banner.displayed = false;
         }
     }
 }

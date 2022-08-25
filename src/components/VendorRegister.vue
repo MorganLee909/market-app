@@ -4,27 +4,27 @@
             <h2>Create New Vendor</h2>
 
             <label>Name of Owner/Business*
-                <input type="text" name="name"/>
+                <input type="text" name="name" placeholder="Name" required/>
             </label>
 
             <label>Email*
-                <input type="email" name="email"/>
+                <input type="email" name="email" placeholder="Email" required/>
             </label>
 
             <label>Password*
-                <input type="password" name="pass"/>
+                <input type="password" name="pass" placeholder="Password" required/>
             </label>
 
             <label>Confirm Password*
-                <input type="password" name="confirmPass"/>
+                <input type="password" name="confirmPass" placeholder="Confirm Password" required/>
             </label>
 
             <label>Description
-                <textarea name="description" rows="10"></textarea>
+                <textarea name="description" rows="3" placeholder="Organization Description"></textarea>
             </label>
 
             <label>Address**
-                <input type="text" name="address"/>
+                <input type="text" name="address" placeholder="Address"/>
             </label>
 
             <p>* Required</p>
@@ -44,6 +44,21 @@
 export default {
     methods: {
         submit(e){
+            if(!/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(e.target.email.value)){
+                this.$emit("banner", "error", "Invalid email address");
+                return;
+            }
+
+            if(e.target.pass.value.length < 10){
+                this.$emit("banner", "error", "Password must contain at least 10 characters");
+                return;
+            }
+
+            if(e.target.pass.value !== e.target.confirmPass.value){
+                this.$emit("banner", "error", "Your passwords do not match");
+                return;
+            }
+
             fetch("http://localhost:8000/vendor", {
                 method: "post",
                 headers: {
@@ -61,11 +76,14 @@ export default {
                 .then(r=>r.json())
                 .then((response)=>{
                     if(typeof(response) === "string"){
+                        this.$emit("banner", "error", response);
                     }else{
                         this.$router.push(`/vendor/${response._id}`);
                     }
                 })
-                .catch((err)=>{});
+                .catch((err)=>{
+                    this.$emit("banner", "error", "Internal error, please try refreshing page");
+                });
         }
     }
 }
@@ -78,7 +96,7 @@ form{
     background: white;
     padding: 35px;
     color: var(--textOnWhite);
-    max-width: 1000px;
+    max-width: 750px;
 }
 
 h2{
@@ -87,7 +105,7 @@ h2{
     margin-bottom: 35px;
 }
 
-input{
+input, textarea{
     font-size: 22px;
 }
 
@@ -107,5 +125,9 @@ input{
     color: var(--textOnWhite);
     border: 1px solid var(--textOnWhite);
     background: none;
+}
+
+.buttonContainer input{
+    margin-right: 0;
 }
 </style>
