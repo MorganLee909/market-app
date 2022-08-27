@@ -6,13 +6,20 @@
             @banner="showBanner"
         ></vendor-register>
 
+        <vendor-login
+            v-if="modals.vendorLogin"
+            @closeModal="closeModal"
+            @banner="showBanner"
+        ></vendor-login>
+
         <notification-banner
             v-show="banner.displayed"
             :type="banner.type"
             :message="banner.message"
         ></notification-banner>
 
-        <button class="loginReg" @click="displayRegister">Register</button>
+        <button class="vendEnter login" @click="displayLogin">Login</button>
+        <button class="vendEnter reg" @click="displayRegister">Register</button>
 
         <h1>Local Market</h1>
 
@@ -29,7 +36,8 @@ export default {
     data(){
         return {
             modals: {
-                vendorReg: false
+                vendorReg: false,
+                vendorLogin: false
             },
             banner: {
                 displayed: false,
@@ -42,8 +50,12 @@ export default {
         displayRegister: function(){
             this.modals.vendorReg = !this.modals.vendorReg;
         },
+        displayLogin: function(){
+            this.modals.vendorLogin = !this.modals.vendorLogin;
+        },
         closeModal: function(){
-            this.modals.vendorReg = false
+            this.modals.vendorReg = false;
+            this.modals.vendorLogin = false;
         },
         showBanner: function(type, message){
             this.banner.type = type;
@@ -80,15 +92,22 @@ export default {
         margin: 15px;
     }
 
-    .loginReg{
+    .vendEnter{
         color: var(--text);
         position: fixed;
         top: 35px;
-        right: 35px;
         background: none;
         border: none;
         font-size: 20px;
         cursor: pointer;
         font-weight: bold;
+    }
+
+    .login{
+        right: 135px;
+    }
+
+    .reg{
+        right: 35px;
     }
 </style>
