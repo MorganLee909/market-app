@@ -27,9 +27,15 @@
                 <input type="text" name="address" placeholder="Address"/>
             </label>
 
+            <label>Vendor URL***
+                <input type="text" name="url" placeholder="URL"/>
+            </label>
+
             <p>* Required</p>
 
             <p>** Optional. Users cannot find your business if you do not add your address. Exact address not shown unless you opt-in to display it. Vendor may update address at any time.</p>
+
+            <p>*** Optional. A unique address for your site. For example "franks-fresh-fiddleheads" will be available at market.com/franks-fresh-fiddleheads. If none, a random ID number will be used. May contain numbers, letters and '-'</p>
 
             <div class="buttonContainer">
                 <button class="actionButton" @click="$emit('closeModal')" type="button">Cancel</button>
@@ -70,7 +76,8 @@ export default {
                     password: e.target.pass.value,
                     confirmPass: e.target.confirmPass.value,
                     description: e.target.description.value,
-                    address: e.target.address.value
+                    address: e.target.address.value,
+                    url: e.target.url.value
                 })
             })
                 .then(r=>r.json())
@@ -78,7 +85,8 @@ export default {
                     if(typeof(response) === "string"){
                         this.$emit("banner", "error", response);
                     }else{
-                        this.$router.push(`/vendor/${response._id}`);
+                        localStorage.setItem("jwt", response.jwt);
+                        this.$router.push(`/${response.vendor._id}`);
                     }
                 })
                 .catch((err)=>{
@@ -94,7 +102,7 @@ form{
     display: flex;
     flex-direction: column;
     background: white;
-    padding: 35px;
+    padding: 25px;
     color: var(--textOnWhite);
     max-width: 750px;
 }
@@ -102,7 +110,11 @@ form{
 h2{
     color: var(--textOnWhite);
     margin: auto;
-    margin-bottom: 35px;
+    margin-bottom: 15px;
+}
+
+p{
+    font-size: 14px;
 }
 
 input, textarea{

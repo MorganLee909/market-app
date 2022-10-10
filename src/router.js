@@ -9,13 +9,8 @@ const router = createRouter({
             component: ()=>import("./views/LandingPage.vue")
         },
         {
-            path: "/second",
-            name: "second",
-            component: ()=>import("./views/SecondPage.vue")
-        },
-        {
-            path: "/vendor",
-            name: "vendor",
+            path: "/:pathMatch(.*)*",
+            name:"vendor",
             component: ()=>import("./views/VendorPage.vue")
         }
     ]

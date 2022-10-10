@@ -22,7 +22,6 @@
 export default {
     methods: {
         submit: function(e){
-            console.log("fetching");
             fetch("http://localhost:8000/vendor/login", {
                 method: "post",
                 headers: {
@@ -35,15 +34,14 @@ export default {
             })
                 .then(r=>r.json())
                 .then((response)=>{
-                    console.log(response);
                     if(typeof(response) === "string"){
                         this.$emit("banner", "error", response);
                     }else{
-                        this.$router.push(`/vendor/${response._id}`);
+                        localStorage.setItem("jwt", response.jwt);
+                        this.$router.push(`/${response.vendor._id}`);
                     }
                 })
                 .catch((err)=>{
-                    console.log(err);
                     this.$emit("banner", "error", "Internal error, please try refreshing the page.");
                 });
         }
