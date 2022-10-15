@@ -44,13 +44,26 @@
 
             <p class="vendorDescription">{{vendor.description}}</p>
 
-            <h2 class="prodTitle">PRODUCTS</h2>
+            <h2 class="prodTitle">AVAILABLE PRODUCTS</h2>
+
+            <div class="products">
+                <vendor-product
+                    v-for="product in vendor.products"
+                    :product="product"
+                ></vendor-product>
+            </div>
         </div>
     </div>
 </template>
 
 <script>
+import VendorProduct from "../components/VendorProduct.vue";
+
 export default {
+    components: {
+        VendorProduct
+    },
+
     data(){
         return {
             vendor: {},
@@ -212,6 +225,11 @@ export default {
 
 .contents h2{
     font-size: 30px;
+    margin-right: auto;
+}
+
+.products{
+    width: 50%;
     margin-right: auto;
 }
 </style>
