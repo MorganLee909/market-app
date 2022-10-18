@@ -6,22 +6,46 @@
             </svg>
 
             <div class="optionPanel">
-                <button class="option chosen">
+                <button 
+                    @click="settingsOption('products')"
+                    class="option"
+                    ref="productsButton"
+                    :class="currentSetting === 'products' ? 'chosen' : ''"
+                >
                     <svg width="24px" height="24px" stroke-width="1.5" viewBox="0 0 24 24" fill="none" color="#000000">
                         <path d="M4.508 20h14.984a.6.6 0 00.592-.501l1.8-10.8A.6.6 0 0021.292 8H2.708a.6.6 0 00-.592.699l1.8 10.8a.6.6 0 00.592.501z" stroke-width="1.5"></path>
                         <path d="M7 8V6a2 2 0 012-2h6a2 2 0 012 2v2" stroke-width="1.5"></path>
                     </svg>
 
-                    <p>Edit Products</p>
+                    <p>Products</p>
+                </button>
+
+                <button
+                    @click="settingsOption('profile')"
+                    class="option"
+                    ref="profileButton"
+                    :class="currentSetting === 'profile' ? 'chosen' : ''"
+                >
+                    <svg width="24px" height="24px" stroke-width="1.5" viewBox="0 0 24 24" fill="none" color="#000000">
+                        <path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2z" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                        <path d="M4.271 18.346S6.5 15.5 12 15.5s7.73 2.846 7.73 2.846M12 12a3 3 0 100-6 3 3 0 000 6z" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                    </svg>
+
+                    <p>Profile</p>
                 </button>
             </div>
 
             <div class="settingsDisplayBlock">
                 <edit-products
-                    v-if="currentSetting === 'editProducts'"
+                    v-if="currentSetting === 'products'"
                     :products="this.compVendor.products"
                     @updateProducts="updateProducts"
                 ></edit-products>
+
+                <vendor-profile
+                    v-if="currentSetting === 'profile'"
+                    :vendor="this.compVendor"
+                ></vendor-profile>
             </div>
         </div>
     </div>
@@ -29,19 +53,21 @@
 
 <script>
 import EditProducts from "./EditProducts.vue";
+import VendorProfile from "./VendorProfile.vue";
 
 export default {
     components: {
-        EditProducts
+        EditProducts,
+        VendorProfile
     },
 
     props: ["vendor"],
 
-    emits: ["updateVendor"],
+    emits: ["updateVendor", "closeSettings"],
 
     data(){
         return {
-            currentSetting: "editProducts",
+            currentSetting: "products",
             compVendor: this.vendor
         }
     },
@@ -50,6 +76,9 @@ export default {
         updateProducts(products){
             this.compVendor.products = products;
             this.$emit("updateVendor", this.compVendor);
+        },
+        settingsOption(setting){
+            this.currentSetting = setting;
         }
     }
 }
