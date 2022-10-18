@@ -13,6 +13,7 @@ import {RouterView} from "vue-router";
     --yellow: rgb(254, 170, 0); /* highlited text and buttons*/
     --alteredYellow: rgb(225, 150, 0); /* for hovering buttons */
     --green: rgb(120, 132, 2);
+    --alteredGreen: rgb(98, 109, 2);
     --darkBrown: rgb(52, 38, 40); /* usually the background */
 }
 
