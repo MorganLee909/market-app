@@ -8,6 +8,7 @@
     <vendor-settings
         v-if="displaySettings"
         @closeSettings="closeSettings"
+        @updateVendor="updateVendor"
         :vendor="this.vendor"
     ></vendor-settings>
 
@@ -239,6 +240,9 @@ export default {
                 .catch((err)=>{
                     this.showBanner("error", "Something went wrong. Try reloading the page");
                 });
+        },
+        updateVendor(vendor){
+            this.vendor = vendor;
         }
     }
 }

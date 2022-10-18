@@ -19,7 +19,8 @@
             <div class="settingsDisplayBlock">
                 <edit-products
                     v-if="currentSetting === 'editProducts'"
-                    :products="this.vendor.products"
+                    :products="this.compVendor.products"
+                    @updateProducts="updateProducts"
                 ></edit-products>
             </div>
         </div>
@@ -36,9 +37,19 @@ export default {
 
     props: ["vendor"],
 
+    emits: ["updateVendor"],
+
     data(){
         return {
-            currentSetting: "editProducts"
+            currentSetting: "editProducts",
+            compVendor: this.vendor
+        }
+    },
+    
+    methods: {
+        updateProducts(products){
+            this.compVendor.products = products;
+            this.$emit("updateVendor", this.compVendor);
         }
     }
 }

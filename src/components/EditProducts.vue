@@ -17,7 +17,7 @@
 
     <form @submit="submit">    
         <editable-product
-            v-for="product in products"
+            v-for="product in compProducts"
             :product="product"
         ></editable-product>
     </form>
@@ -31,6 +31,8 @@ export default {
         EditableProduct
     },
 
+    emits: ["updateProducts"],
+
     props: ["products"],
 
     data(){
@@ -39,7 +41,8 @@ export default {
                 displayed: false,
                 type: "",
                 message: ""
-            }
+            },
+            compProducts: this.products
         }
     },
 
@@ -51,58 +54,43 @@ export default {
             let updated = [];
             let removed = [];
 
-            for(let i = 0; i < this.products.length; i++){
-                if(this.products[i].status === "new"){
-                    created.push(this.products[i]);
-                }else if(this.products[i].status === "updated"){
-                    updated.push(this.products[i]);
-                }else if(this.products[i].status === "removed"){
-                    removed.push(this.products[i]._id);
+            for(let i = 0; i < this.compProducts.length; i++){
+                if(this.compProducts[i].status === "new"){
+                    created.push(this.compProducts[i]);
+                }else if(this.compProducts[i].status === "updated"){
+                    updated.push(this.compProducts[i]);
+                }else if(this.compProducts[i].status === "removed"){
+                    removed.push(this.compProducts[i]._id);
                 }
             }
 
-            let headers = {
-                "Content-Type": "application/json",
-                "Authorization": `Bearer ${localStorage.getItem("jwt")}`
-            };
-
-            let create = fetch("http://localhost:8000/product", {
-                method: "post",
-                headers: headers,
-                body: JSON.stringify({products: created})
-            });
-            let remove = fetch("http://localhost:8000/product", {
-                method: "delete",
-                headers: headers,
-                body: JSON.stringify({products: removed})
-            });
-
-            Promise.all([create, remove])
-                .then(r=>r.map(r=>r.json()))
-                .then((response)=>{
-                    if(typeof(response) === "string"){
-                        this.showBanner("error", response);
-                    }else{                        
-                        return fetch("http://localhost:8000/product", {
-                            method: "put",
-                            headers: headers,
-                            body: JSON.stringify({products: updated})
-                        });
-                    }
+            fetch("http://localhost:8000/vendor/product", {
+                method: "put",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${localStorage.getItem("jwt")}`
+                },
+                body: JSON.stringify({
+                    create: created,
+                    update: updated,
+                    remove: removed
                 })
+            })
+                .then(r=>r.json())
                 .then((response)=>{
                     if(typeof(response) === "string"){
                         this.showBanner("error", response);
                     }else{
-
+                        this.$emit("updateProducts", response);
+                        this.showBanner("success", "Products saved");
                     }
                 })
                 .catch((err)=>{
-                    this.showBanner("error", "Something went Wrong. Please try refreshing the page.");
+                    this.showBanner("error", "Something went wrong. Try refreshing the page");
                 });
         },
         newProduct(){
-            this.products.unshift({
+            this.compProducts.unshift({
                 name: "",
                 unit: "",
                 quantity: 0,
