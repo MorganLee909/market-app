@@ -8,36 +8,36 @@
     <div class="header">
         <h1>Your Profile</h1>
 
-        <button class="actionButton">Save</button>
+        <button class="actionButton" @click="submit">Save</button>
     </div>
 
-    <form @submit.prevent="submit">
+    <form ref="profileForm">
         <label>Name of Business/Owner
-            <input type="text" v-model="compVendor.name"/>
+            <input name="name" type="text" v-model="compVendor.name"/>
         </label>
 
         <label>Email
-            <input type="email" v-model="compVendor.email"/>
+            <input name="email" type="email" v-model="compVendor.email"/>
         </label>
 
         <label>Description
-            <textarea v-model="compVendor.description"></textarea>
+            <textarea name="description" v-model="compVendor.description"></textarea>
         </label>
 
         <label>Address
-            <input type="text" v-model="compVendor.address.full"/>
+            <input name="address" type="text" v-model="compVendor.address.full"/>
         </label>
 
         <label>Your URL
-            <input type="text" v-model="compVendor.url"/>
+            <input name="url" type="text" v-model="compVendor.url"/>
         </label>
 
         <label>Photos
-            <input type="file"/>
+            <input name="images" type="file" multiple/>
         </label>
 
         <label>Business hours
-            <input type="text"/>
+            <input name="hours" type="text"/>
         </label>
     </form>
 </template>
@@ -59,19 +59,14 @@ export default {
 
     methods: {
         submit(){
-            fetch("/vendor", {
+            let data = new FormData(this.$refs.profileForm);
+
+            fetch("http://localhost:8000/vendor", {
                 method: "put",
                 headers: {
-                    "Content-Type": "application/json",
                     "Authorization": `Bearer ${localStorage.getItem("jwt")}`
                 },
-                body: JSON.stringify({
-                    name: this.compVendor.name,
-                    email: this.compVendor.email,
-                    url: this.compVendor.url,
-                    description: this.compVendor.description,
-                    address: this.compVendor.address
-                })
+                body: data
             })
                 .then(r=>r.json())
                 .then((response)=>{
@@ -82,6 +77,7 @@ export default {
                     }
                 })
                 .catch((err)=>{
+                    console.log(err);
                     this.showBanner("error", "Something went wrong. Try refreshing the page");
                 });
         },
