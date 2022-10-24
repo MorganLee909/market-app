@@ -63,6 +63,7 @@
                 <vendor-privacy
                     v-if="currentSetting === 'privacy'"
                     :vendor="this.compVendor"
+                    @updateVendor="this.updateVendor"
                 ></vendor-privacy>
             </div>
         </div>
@@ -95,6 +96,10 @@ export default {
     methods: {
         updateProducts(products){
             this.compVendor.products = products;
+            this.$emit("updateVendor", this.compVendor);
+        },
+        updateVendor(vendor){
+            this.compVendor = vendor;
             this.$emit("updateVendor", this.compVendor);
         },
         settingsOption(setting){

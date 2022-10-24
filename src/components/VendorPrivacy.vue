@@ -14,12 +14,12 @@
     <h2>Checked items will be publicly displayed to users</h2>
 
     <label>
-        <input type="checkbox" v-model="this.compVendor.publicData.email"/>
+        <input type="checkbox" v-model="this.vendor.publicData.email"/>
         Email
     </label>
 
     <label>
-        <input type="checkbox" v-model="this.compVendor.publicData.searchable"/>
+        <input type="checkbox" v-model="this.vendor.publicData.searchable"/>
         Searchable
         <span class="explain"> *Determines whether users can find your link through search. Does not share address.</span>
     </label>
@@ -27,27 +27,27 @@
     <h3>Address <span class="explain">*Determines whether address components are displayed on your main page.</span></h3>
 
     <label>
-        <input type="checkbox" v-model="this.compVendor.publicData.state"/>
+        <input type="checkbox" v-model="this.vendor.publicData.state"/>
         State
     </label>
 
     <label>
-        <input type="checkbox" v-model="this.compVendor.publicData.country"/>
+        <input type="checkbox" v-model="this.vendor.publicData.county"/>
         County
     </label>
 
     <label>
-        <input type="checkbox" v-model="this.compVendor.publicData.city"/>
+        <input type="checkbox" v-model="this.vendor.publicData.city"/>
         City
     </label>
 
     <label>
-        <input type="checkbox" v-model="this.compVendor.publicData.road"/>
+        <input type="checkbox" v-model="this.vendor.publicData.road"/>
         Road
     </label>
 
     <label>
-        <input type="checkbox" v-model="this.compVendor.publicData.streetNumber"/>
+        <input type="checkbox" v-model="this.vendor.publicData.streetNumber"/>
         Street Number
     </label>
 </template>
@@ -56,14 +56,47 @@
 export default {
     props: ["vendor"],
 
+    emits: ["updateVendor"],
+
     data(){
         return {
             banner: {
                 displayed: false,
                 type: "",
                 message: ""
-            },
-            compVendor: this.vendor
+            }
+        }
+    },
+
+    methods: {
+        submit(){
+            fetch("http://localhost:8000/vendor/public", {
+                method: "put",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${localStorage.getItem("jwt")}`
+                },
+                body: JSON.stringify(this.vendor.publicData)
+            })
+                .then(r=>r.json())
+                .then((response)=>{
+                    if(typeof(response) === "string"){
+                        this.showBanner("error", response)
+                    }else{
+                        this.$emit("updateVendor", response)
+                        this.showBanner("success", "Privacy settings updated");
+                    }
+                })
+                .catch((err)=>{
+                    this.showBanner("error", "Something went wrong, Try refreshing the page");
+                });
+        },
+        showBanner(type, message){
+            this.banner.type = type;
+            this.banner.message = message;
+            this.banner.displayed = true;
+
+            setTimeout(()=>{this.banner.displayed = false}, 5000);
         }
     }
 }

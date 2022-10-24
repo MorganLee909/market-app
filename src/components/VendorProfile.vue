@@ -149,7 +149,6 @@ export default {
                     }
                 })
                 .catch((err)=>{
-                    console.log(err);
                     this.showBanner("error", "Something went wrong. Try refreshing the page");
                 });
         },
@@ -209,10 +208,7 @@ export default {
     },
     computed:{
         humanTime(event, day, openClose){
-            console.log(day);
-            console.log(openClose);
             let time = this.vendor.hours[day][openClose];
-            console.log(time);
             let hours = Math.floor(time / 60);
             hours = hours < 10 ? `0${hours}` : `${hours}`;
             let minutes = time % 60;
