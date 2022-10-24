@@ -93,13 +93,16 @@ h1{
 
 label{
     display: flex;
+    justify-content: space-between;
     align-items: center;
     cursor: pointer;
     font-size: 24px;
+    width: 35%;
+    border-bottom: 1px solid black;
+    margin-bottom: 35px;
 }
 
 input{
     cursor: pointer;
-    margin-left: 15px;
 }
 </style>
