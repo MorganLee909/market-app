@@ -86,7 +86,7 @@ export default {
                         this.$emit("banner", "error", response);
                     }else{
                         localStorage.setItem("jwt", response.jwt);
-                        this.$router.push(`/${response.vendor._id}`);
+                        this.$router.push(`/${response.vendor.url}`);
                     }
                 })
                 .catch((err)=>{
