@@ -142,6 +142,7 @@
                 <vendor-product
                     v-for="product in vendor.products"
                     :product="product"
+                    :style="vendor.style"
                 ></vendor-product>
             </div>
         </div>

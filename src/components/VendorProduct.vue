@@ -1,5 +1,5 @@
 <template>
-    <div class="productComp">
+    <div class="productComp" :style="{background: style.secondaryColor, color: style.textColor}">
         <h2>{{product.name}}</h2>
 
         <div class="quantityDetails">
@@ -12,9 +12,7 @@
 
 <script>
 export default {
-    props: [
-        "product"
-    ]
+    props: ["product", "style"]
 }
 </script>
 
