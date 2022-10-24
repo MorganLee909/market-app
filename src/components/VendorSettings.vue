@@ -46,6 +46,19 @@
                 
                     <p>Privacy</p>
                 </button>
+
+                <button
+                    @click="settingsOption('style')"
+                    class="option"
+                    ref="styleButton"
+                    :class="currentSetting === 'style' ? 'chosen' : ''"
+                >
+                    <svg width="24px" height="24px" stroke-width="1.5" viewBox="0 0 24 24" fill="none" color="#000000">
+                        <path d="M4 4v16h16M20.01 16l-.011.01M20.01 12l-.011.01M20.01 8l-.011.01M20.01 4l-.011.01M8.01 4l-.011.01M12.01 4l-.011.01M16.01 4l-.011.01" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                    </svg>
+
+                    <p>Style</p>
+                </button>
             </div>
 
             <div class="settingsDisplayBlock">
@@ -65,6 +78,12 @@
                     :vendor="this.compVendor"
                     @updateVendor="this.updateVendor"
                 ></vendor-privacy>
+
+                <vendor-style
+                    v-if="currentSetting === 'style'"
+                    :style="this.vendor.style"
+                    @updateStyle="this.updateStyle"
+                ></vendor-style>
             </div>
         </div>
     </div>
@@ -74,12 +93,14 @@
 import EditProducts from "./EditProducts.vue";
 import VendorProfile from "./VendorProfile.vue";
 import VendorPrivacy from "./VendorPrivacy.vue";
+import VendorStyle from "./VendorStyle.vue";
 
 export default {
     components: {
         EditProducts,
         VendorProfile,
-        VendorPrivacy
+        VendorPrivacy,
+        VendorStyle
     },
 
     props: ["vendor"],
@@ -96,6 +117,10 @@ export default {
     methods: {
         updateProducts(products){
             this.compVendor.products = products;
+            this.$emit("updateVendor", this.compVendor);
+        },
+        updateStyle(style){
+            this.compVendor.style = style;
             this.$emit("updateVendor", this.compVendor);
         },
         updateVendor(vendor){
