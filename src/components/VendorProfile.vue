@@ -61,9 +61,6 @@
 
             <h3>Tuesday</h3>
             <div class="openClose">
-                <label>Open
-                    <input ref="tueOpen" type="time" :value="toHumanTime(compVendor.hours.tuesday.open)"/>
-                </label>
                 <label>Close
                     <input ref="tueClose" type="time" :value="toHumanTime(compVendor.hours.tuesday.close)"/>
                 </label>

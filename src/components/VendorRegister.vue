@@ -4,7 +4,7 @@
             <h2>Create New Vendor</h2>
 
             <label>Name of Owner/Business*
-                <input type="text" name="name" placeholder="Name" required/>
+                <input ref="name" type="text" name="name" placeholder="Name" required/>
             </label>
 
             <label>Email*
@@ -48,6 +48,10 @@
 
 <script>
 export default {
+    mounted(){
+        this.$refs.name.focus();
+    },
+
     methods: {
         submit(e){
             if(!/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(e.target.email.value)){

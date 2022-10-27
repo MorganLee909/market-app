@@ -9,6 +9,15 @@ const router = createRouter({
             component: ()=>import("./views/LandingPage.vue")
         },
         {
+            path: "/search",
+            name: "results",
+            query: {
+                address: "address",
+                distance: "distance"
+            },
+            component: ()=>import("./views/SearchResults.vue")
+        },
+        {
             path: "/:pathMatch(.*)*",
             name:"vendor",
             component: ()=>import("./views/VendorPage.vue")

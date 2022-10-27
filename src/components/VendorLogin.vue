@@ -2,7 +2,7 @@
     <div @click="$emit('closeModal')" class="modal">
         <form @submit.prevent="submit" @click.stop>
             <label>Email
-                <input name="email" type="text" placeholder="Email" required/>
+                <input ref="email" name="email" type="text" placeholder="Email" required/>
             </label>
 
             <label>Password
@@ -20,6 +20,10 @@
 
 <script>
 export default {
+    mounted(){
+        this.$refs.email.focus();
+    },
+
     methods: {
         submit: function(e){
             fetch("http://localhost:8000/vendor/login", {
