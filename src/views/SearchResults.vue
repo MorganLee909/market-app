@@ -4,15 +4,26 @@
         :type="banner.type"
         :message="banner.message"
     ></notification-banner>
-    <h1>Search Results</h1>
 
-    <div class="vendors">
-        <h1 v-for="(vendor, i) in vendors" :key="i">{{vendor.name}}</h1>
+    <div class="container">
+        <h1>Vendors in your area</h1>
+
+        <div class="vendors">
+            <vendor-search-result
+            v-for="(vendor, i) in vendors"
+            :key="i"
+            :vendor="vendor"
+            ></vendor-search-result>
+        </div>
     </div>
 </template>
 
 <script>
+import VendorSearchResult from "../components/VendorSearchResult.vue";
+
 export default{
+    components: {VendorSearchResult},
+
     data(){
         return {
             banner: {
@@ -52,7 +63,17 @@ export default{
 </script>
 
 <style scoped>
-body{
+.container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100vw;
+    padding-top: 35px;
     background: var(--darkBrown);
+}
+
+.container h1{
+    margin-bottom: 35px;
+    font-size: 35px;
 }
 </style>
