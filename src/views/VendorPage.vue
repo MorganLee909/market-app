@@ -16,7 +16,7 @@
         <div class="sidebar" :style="{'background': vendor.style.secondaryColor}">
             <h1>{{vendor.name}}</h1>
 
-            <div class="sidebarDetail">
+            <div class="sidebarDetail" v-if="vendor.email">
                 <svg width="20px" height="20px" stroke-width="1.5" viewBox="0 0 24 24" fill="none" color="#000000">
                     <path d="M7 12l5 3.5 5-3.5" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
                     <path d="M2 20V9.132a2 2 0 01.971-1.715l8-4.8a2 2 0 012.058 0l8 4.8A2 2 0 0122 9.132V20a2 2 0 01-2 2H4a2 2 0 01-2-2z" stroke="#ffffff" stroke-width="1.5"></path>
@@ -44,7 +44,14 @@
                     <path d="M12 11a1 1 0 100-2 1 1 0 000 2z" fill="#000000" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
                 </svg>
 
-                <p>{{vendor.address?.full}}</p>
+                <p v-if="loggedIn">{{vendor.address?.full}}</p>
+
+                <div class="noVendorAddress" v-else>
+                    <p v-if="vendor.address?.streetNumber">{{vendor.address.streetNumber}}</p>
+                    <p v-if="vendor.address?.road">{{vendor.address.road}},</p>
+                    <p v-if="vendor.address?.city">{{vendor.address.city}},</p>
+                    <p v-if="vendor.address?.state">{{vendor.address.state}}</p>
+                </div>
             </div>
 
             <div class="hours">
@@ -116,7 +123,7 @@
         </div>
 
         <div class="contents" :style="{'background': vendor.style.mainColor}">
-            <svg @click="showSettings" class="settingsIcon" width="24px" height="24px" stroke-width="1.5" viewBox="0 0 24 24" fill="none" color="#000000">
+            <svg v-if="loggedIn" @click="showSettings" class="settingsIcon" width="24px" height="24px" stroke-width="1.5" viewBox="0 0 24 24" fill="none" color="#000000">
                 <path d="M12 15a3 3 0 100-6 3 3 0 000 6z" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
                 <path d="M19.622 10.395l-1.097-2.65L20 6l-2-2-1.735 1.483-2.707-1.113L12.935 2h-1.954l-.632 2.401-2.645 1.115L6 4 4 6l1.453 1.789-1.08 2.657L2 11v2l2.401.655L5.516 16.3 4 18l2 2 1.791-1.46 2.606 1.072L11 22h2l.604-2.387 2.651-1.098C16.697 18.831 18 20 18 20l2-2-1.484-1.75 1.098-2.652 2.386-.62V11l-2.378-.605z" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
             </svg>
@@ -162,6 +169,7 @@ export default {
     data(){
         return {
             vendor: {},
+            loggedIn: false,
             banner: {
                 displayed: false,
                 type: "",
@@ -235,8 +243,14 @@ export default {
                 headers: headers,
             })
                 .then(r=>r.json())
-                .then((vendor)=>{
-                    this.vendor = vendor;
+                .then((response)=>{
+                    if(typeof(response) === "response"){
+                        this.showBanner("error", response)
+                    }else{
+                        console.log(response);
+                        this.loggedIn = response.loggedIn;
+                        this.vendor = response.vendor;
+                    }
                 })
                 .catch((err)=>{
                     this.showBanner("error", "Something went wrong. Try reloading the page");
@@ -284,6 +298,14 @@ export default {
 .urlClick{
     margin-left: 10px;
     cursor: pointer;
+}
+
+.noVendorAddress{
+    display: flex;
+}
+
+.noVendorAddress > *{
+    margin: 0 3px;
 }
 
 .hours{
