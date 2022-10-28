@@ -10,9 +10,9 @@
 
         <div class="vendors">
             <vendor-search-result
-            v-for="(vendor, i) in vendors"
-            :key="i"
-            :vendor="vendor"
+                v-for="(vendor, i) in vendors"
+                :key="i"
+                :vendor="vendor"
             ></vendor-search-result>
         </div>
     </div>
