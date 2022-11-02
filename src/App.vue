@@ -8,13 +8,11 @@ import {RouterView} from "vue-router";
 
 <style>
 :root{
-    --text: rgb(247, 244, 239);
-    --textOnWhite: rgb(48, 66, 96);
-    --yellow: rgb(254, 170, 0); /* highlited text and buttons*/
-    --alteredYellow: rgb(225, 150, 0); /* for hovering buttons */
-    --green: rgb(120, 132, 2);
-    --alteredGreen: rgb(98, 109, 2);
-    --darkBrown: rgb(52, 38, 40); /* usually the background */
+    --primaryColor: #d6d6d6;
+    --secondaryColor: #8c8c8c;
+    --text: #0b0909;
+    --accent: #44444c;
+    --alteredAccent: #707070;
 }
 
 *{
@@ -23,7 +21,7 @@ import {RouterView} from "vue-router";
 }
 
 #app{
-    background: var(--darkBrown);
+    background: var(--primaryColor);
     color: var(--text);
     height: 100vh;
     width: 100vw;
@@ -32,17 +30,17 @@ import {RouterView} from "vue-router";
 
 .pageLink{
     background: none;
-    border: 3px solid var(--yellow);
+    border: 3px solid var(--accent);
     border-radius: 5px;
     padding: 15px;
-    color: var(--yellow);
+    color: var(--accent);
     text-decoration: none;
     font-size: 25px;
 }
 
 .pageLink:hover{
-    border: 3px solid var(--alteredYellow);
-    color: var(--alteredYellow);
+    border: 3px solid var(--alteredAccent);
+    color: var(--alteredAccent);
 }
 
 .actionButton{
@@ -53,21 +51,21 @@ import {RouterView} from "vue-router";
     width: 200px;
     margin: 15px;
     cursor: pointer;
-    color: var(--text);
-    background: var(--yellow);
+    color: white;
+    background: var(--accent);
     font-weight: bold;
     text-align: center;
     text-decoration: none;
 }
 
 .actionButton:hover{
-    background: var(--alteredYellow);
+    background: var(--alteredAccent);
 }
 
 .actionButton:active{
     background: none;
-    color: var(--yellow);
-    border: 1px solid var(--yellow);
+    color: var(--accent);
+    border: 1px solid var(--accent);
 }
 
 .modal{

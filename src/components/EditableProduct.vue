@@ -56,7 +56,7 @@ export default {
     align-items: center;
     padding: 5px 15px;
     margin: 10px 0;
-    background: var(--darkBrown);
+    background: var(--primaryColor);
     border-radius: 5px;
     width: 95%;
 }

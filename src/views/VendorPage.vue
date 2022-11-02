@@ -278,7 +278,7 @@ export default {
     padding: 35px;
     box-sizing: border-box;
     width: 500px;
-    background: var(--green);
+    background: var(--secondaryColor);
 }
 
 .sidebar h1{

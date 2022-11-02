@@ -10,6 +10,7 @@
             v-if="modals.vendorLogin"
             @closeModal="closeModal"
             @banner="showBanner"
+            @register="displayRegister"
         ></vendor-login>
 
         <notification-banner
@@ -18,10 +19,9 @@
             :message="banner.message"
         ></notification-banner>
 
-        <button class="vendEnter login" @click="displayLogin">Login</button>
-        <button class="vendEnter reg" @click="displayRegister">Register</button>
+        <button class="vendEnter login" @click="displayLogin">Vendor Access</button>
 
-        <h1>Local Market</h1>
+        <h1>My Village Market</h1>
 
         <form class="searchBar" @submit.prevent="search()">
             <input type="text" ref="address" placeholder="ADDRESS" required/>
@@ -66,6 +66,8 @@ export default {
 
     methods: {
         displayRegister: function(){
+            console.log("something");
+            this.modals.vendorLogin = false;
             this.modals.vendorReg = !this.modals.vendorReg;
         },
         displayLogin: function(){
@@ -79,6 +81,11 @@ export default {
             let address = this.$refs.address.value;
             let distance = this.$refs.distance.value;
             let unit = this.$refs.unit.value;
+
+            if(address === ""){
+                this.showBanner("error", "Address bar cannot be empty");
+                return;
+            }
 
             switch(unit){
                 case "km": distance *= 1000; break;
@@ -116,7 +123,7 @@ export default {
     }
 
     h1{
-        color: var(--yellow);
+        color: var(--text);
         font-size: 75px;
         margin: 35px;
     }
@@ -124,6 +131,7 @@ export default {
     .searchBar{
         background: white;
         padding: 15px;
+        border: 2px solid var(--secondaryColor);
     }
 
     input, select{
@@ -140,6 +148,7 @@ export default {
     p{
         font-size: 35px;
         margin: 15px;
+        color: var(--text);
     }
 
     .vendEnter{
@@ -151,13 +160,6 @@ export default {
         font-size: 20px;
         cursor: pointer;
         font-weight: bold;
-    }
-
-    .login{
-        right: 135px;
-    }
-
-    .reg{
         right: 35px;
     }
 

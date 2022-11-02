@@ -117,17 +117,17 @@ export default {
 }
 
 .newProductBtn{
-    background: var(--green);
+    background: var(--secondaryColor);
 }
 
 .newProductBtn:hover{
-    background: var(--alteredGreen);
+    background: var(--alteredSecondaryColor);
 }
 
 .newProductBtn:active{
     background: none;
-    color: var(--green);
-    border: 1px solid var(--green);
+    color: var(--secondaryColor);
+    border: 1px solid var(--secondaryColor);
 }
 
 .actionButton{

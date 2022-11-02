@@ -69,7 +69,7 @@ export default{
     align-items: center;
     width: 100vw;
     padding-top: 35px;
-    background: var(--darkBrown);
+    background: var(--primaryColor);
 }
 
 .container h1{

@@ -14,6 +14,8 @@
 
                 <input class="actionButton" type="submit" value="Log In"/>
             </div>
+
+            <button type="button" class="registerButton" @click="$emit('register')">New Vendor</button>
         </form>
     </div>
 </template>
@@ -23,6 +25,8 @@ export default {
     mounted(){
         this.$refs.email.focus();
     },
+
+    emits: ["register"],
 
     methods: {
         submit: function(e){
@@ -87,5 +91,12 @@ input, textarea{
 
 .buttonContainer input{
     margin-right: 0;
+}
+
+.registerButton{
+    background: none;
+    text-decoration: underline;
+    border: none;
+    cursor: pointer;
 }
 </style>

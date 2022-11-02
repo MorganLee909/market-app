@@ -21,7 +21,7 @@ export default {
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    background: var(--green);
+    background: var(--secondaryColor);
     width: 100%;
     border-radius: 5px;
     margin: 15px 0;
