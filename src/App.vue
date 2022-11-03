@@ -81,4 +81,12 @@ import {RouterView} from "vue-router";
     top: 0;
     left: 0;
 }
+
+@media screen and (max-width: 800px){
+    .actionButton{
+        font-size: 16px;
+        padding: 10px 0;
+        box-shadow: 0 0 5px black;
+    }
+}
 </style>

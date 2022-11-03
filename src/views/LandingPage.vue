@@ -26,13 +26,15 @@
         <form class="searchBar" @submit.prevent="search()">
             <input type="text" ref="address" placeholder="ADDRESS" required/>
 
-            <input type="number" min="1" step="1" ref="distance" value="25" required/>
+            <div class="distanceContainer">
+                <input type="number" min="1" step="1" ref="distance" value="25" required/>
 
-            <select ref="unit" required>
-                <option value="mi" default>Miles</option>
-                <option value="km">Kilometers</option>
-            </select>
-
+                <select ref="unit" required>
+                    <option value="mi" default>Miles</option>
+                    <option value="km">Kilometers</option>
+                </select>
+            </div>
+                
             <input type="submit" style="display:none"/>
         </form>
 
@@ -113,59 +115,101 @@ export default {
 </script>
 
 <style scoped>
-    .landingPage{
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        height: 100%;
-        width: 100%;
-    }
+.landingPage{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+}
 
+h1{
+    color: var(--text);
+    font-size: 75px;
+    margin: 35px;
+}
+
+.searchBar{
+    display: flex;
+    background: white;
+    padding: 15px;
+    border: 2px solid var(--secondaryColor);
+}
+
+input, select{
+    font-size: 24px;
+    background: white;
+    border: none;
+    outline: none;
+}
+
+input[type="number"]{
+    width: 75px;
+}
+
+p{
+    font-size: 35px;
+    margin: 15px;
+    color: var(--text);
+}
+
+.vendEnter{
+    color: var(--text);
+    position: fixed;
+    top: 35px;
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    font-weight: bold;
+    right: 35px;
+}
+
+.actionButton{
+    font-size: 35px;
+    width: initial;
+    padding: 5px;
+}
+
+@media screen and (max-width: 800px){
     h1{
-        color: var(--text);
-        font-size: 75px;
-        margin: 35px;
+        font-size: 45px;
+        margin: 0 15px;
     }
 
     .searchBar{
-        background: white;
-        padding: 15px;
-        border: 2px solid var(--secondaryColor);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background: none;
+        border: none;
+    }
+
+    .searchBar > *{
+        margin: 15px 0;
+    }
+}
+
+@media screen and (max-width: 450px){
+    h1{
+        margin: 5px;
+        font-size: 30px;
     }
 
     input, select{
-        font-size: 24px;
-        background: white;
-        border: none;
-        outline: none;
+        font-size: 20px;
+        height: 50px;
     }
 
-    input[type="number"]{
-        width: 75px;
-    }
-
-    p{
-        font-size: 35px;
-        margin: 15px;
-        color: var(--text);
+    input[type="text"]{
+        padding: 5px 10px;
+        box-sizing: border-box;
     }
 
     .vendEnter{
-        color: var(--text);
-        position: fixed;
-        top: 35px;
-        background: none;
-        border: none;
-        font-size: 20px;
-        cursor: pointer;
-        font-weight: bold;
-        right: 35px;
+        font-size: 16px;
+        font-weight: normal;
     }
-
-    .actionButton{
-        font-size: 35px;
-        width: initial;
-        padding: 5px;
-    }
+}
 </style>
