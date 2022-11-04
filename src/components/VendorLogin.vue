@@ -99,4 +99,30 @@ input, textarea{
     border: none;
     cursor: pointer;
 }
+
+@media screen and (max-width: 600px){
+    form{
+        align-items: center;
+        padding: 15px;
+        width: 100%;
+    }
+
+    label{
+        width: 300px;
+    }
+    
+    .buttonContainer{
+        flex-direction: column-reverse;
+        width: 100%;
+    }
+
+    .buttonContainer > *{
+        width: 100%;
+        margin: 10px 0;
+    }
+
+    .registerButton{
+        margin-top: 15px;
+    }
+}
 </style>
