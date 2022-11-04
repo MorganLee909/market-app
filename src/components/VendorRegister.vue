@@ -102,6 +102,11 @@ export default {
 </script>
 
 <style scoped>
+.modal{
+    max-height: 100vh;
+    overflow-y: auto;
+}
+
 form{
     display: flex;
     flex-direction: column;
@@ -145,5 +150,39 @@ input, textarea{
 
 .buttonContainer input{
     margin-right: 0;
+}
+
+@media screen and (max-width: 800px){
+    .modal{
+        align-items: flex-start;
+    }
+
+    form{
+        width: 100%;
+        align-items: center;
+        padding: 10px 0;
+    }
+
+    label{
+        width: 90%;
+    }
+
+    p{
+        margin-right: auto;
+        padding-left: 10px;
+    }
+}
+
+@media screen and (max-width: 500px){
+    .buttonContainer{
+        flex-direction: column-reverse;
+        align-items: center;
+        width: 90%;
+    }
+
+    .buttonContainer > *{
+        width: 100%;
+        margin: 15px 0;
+    }
 }
 </style>
