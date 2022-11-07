@@ -25,8 +25,8 @@ export default {
 .vendor{
     display: flex;
     align-items: center;
-    background: var(--text);
-    color: var(--textOnWhite);
+    background: var(--secondaryColor);
+    color: var(--text);
     text-decoration: none;
     margin: 35px 0;
     padding: 15px;
@@ -47,5 +47,24 @@ export default {
 
 .address > *{
     margin-left: 5px;
+}
+
+@media screen and (max-width: 800px){
+    .vendor{
+        flex-direction: column;
+        min-width: 500px;
+        box-sizing: border-box;
+    }
+
+    .vendor > *{
+        margin: 5px 0;
+    }
+}
+
+@media screen and (max-width: 500px){
+    .vendor{
+        min-width: 0;
+        width: 100%;
+    }
 }
 </style>

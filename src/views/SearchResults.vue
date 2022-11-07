@@ -75,5 +75,12 @@ export default{
 .container h1{
     margin-bottom: 35px;
     font-size: 35px;
+    text-align: center;
+}
+
+@media screen and (max-width: 800px){
+    .vendors{
+        width: 100%;
+    }
 }
 </style>
