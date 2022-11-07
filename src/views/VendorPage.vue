@@ -30,7 +30,7 @@
                     <path d="M3.338 17A9.996 9.996 0 0012 22a9.996 9.996 0 008.662-5M3.338 7A9.996 9.996 0 0112 2a9.996 9.996 0 018.662 5M13 21.95s1.408-1.853 2.295-4.95M13 2.05S14.408 3.902 15.295 7M11 21.95S9.592 20.098 8.705 17M11 2.05S9.592 3.902 8.705 7M9 10l1.5 5 1.5-5 1.5 5 1.5-5M1 10l1.5 5L4 10l1.5 5L7 10M17 10l1.5 5 1.5-5 1.5 5 1.5-5" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
                 </svg>
 
-                <p>market.com/{{vendor.url}}</p>
+                <p>myvillage.market/{{vendor.url}}</p>
 
                 <svg class="urlClick" @click="copyUrl" width="24px" height="24px" stroke-width="1.5" viewBox="0 0 24 24" fill="none" color="#000000">
                     <path d="M19.4 20H9.6a.6.6 0 01-.6-.6V9.6a.6.6 0 01.6-.6h9.8a.6.6 0 01.6.6v9.8a.6.6 0 01-.6.6z" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -130,7 +130,7 @@
 
             <h1>{{vendor.name}}</h1>
 
-            <div class="vendorPhotos">
+            <div class="vendorPhotos" ref="photoContainer">
                 <img
                     v-for="(photo, i) in vendor.photos"
                     ref="vendorPhoto"
@@ -196,9 +196,12 @@ export default {
                     this.displayedPhoto = (this.displayedPhoto + 1) % photoCount;
                 }, 5000);
 
+                let maxPhotoSize = 0;
                 for(let i = 0; i < this.$refs.vendorPhoto.length; i++){
                     this.$refs.vendorPhoto[i].onload = ()=>{
+                        if(this.$refs.vendorPhoto[i].height > maxPhotoSize) maxPhotoSize = this.$refs.vendorPhoto[i].height;
                         this.$refs.vendorPhoto[i].style.marginLeft = `-${this.$refs.vendorPhoto[i].width / 2}px`;
+                        if(i === this.$refs.vendorPhoto.length - 1) this.$refs.photoContainer.style.height = `${maxPhotoSize}px`;
                     }
                 }
             },
@@ -325,6 +328,7 @@ export default {
 
 .dayName{
     width: 35%;
+    min-width: 100px;
 }
 
 .contents{
@@ -390,5 +394,68 @@ export default {
 .products{
     width: 50%;
     margin-right: auto;
+}
+
+@media screen and (max-width: 1400px){
+    .vendorPhoto{
+        height: initial;
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 1200px){
+    .sidebar{
+        width: 300px;
+        padding: 5px;
+    }
+
+    .products{
+        width: 100%;
+    }
+
+    .settingsIcon{
+        display: none;
+    }
+}
+
+@media screen and (max-width: 800px){
+    .contents{
+        height: initial;
+    }
+
+    .container{
+        flex-direction: column;
+        height: initial;
+    }
+
+    .sidebar{
+        width: 100vw;
+        padding-left: 35px;
+    }
+
+    .contents h1{
+        display: none;
+    }
+
+    .vendorDescription{
+        line-height: initial;
+        font-size: 18px;
+    }
+}
+
+@media screen and (max-width: 600px){
+    .contents{
+        padding: 5px;
+    }
+}
+
+@media screen and (max-width: 400px){
+    .sidebar{
+        padding-left: 5px;
+    }
+
+    .vendorDescription{
+        padding: 5px;
+    }
 }
 </style>

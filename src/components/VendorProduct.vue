@@ -41,4 +41,10 @@ h2{
     font-size: 20px;
     margin: 0 3px;
 }
+
+@media screen and (max-width: 800px){
+    .productComp{
+        box-sizing: border-box;
+    }
+}
 </style>
