@@ -5,6 +5,8 @@
         :message="banner.message"
     ></notification-banner>
 
+    <home-button></home-button>
+
     <div class="container">
         <h1>Vendors in your area</h1>
 
@@ -20,9 +22,13 @@
 
 <script>
 import VendorSearchResult from "../components/VendorSearchResult.vue";
+import HomeButton from "../components/HomeButton.vue";
 
 export default{
-    components: {VendorSearchResult},
+    components: {
+        VendorSearchResult,
+        HomeButton
+    },
 
     data(){
         return {
