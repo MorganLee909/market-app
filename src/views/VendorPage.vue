@@ -12,8 +12,8 @@
         :vendor="this.vendor"
     ></vendor-settings>
 
-    <div class="container" :style="{'color': vendor.style.textColor}">
-        <div class="sidebar" :style="{'background': vendor.style.secondaryColor}">
+    <div class="container" :style="{'color': vendor.style?.textColor}">
+        <div class="sidebar" :style="{'background': vendor.style?.secondaryColor}">
             <h1>{{vendor.name}}</h1>
 
             <div class="sidebarDetail" v-if="vendor.email">
@@ -122,7 +122,7 @@
             </div>
         </div>
 
-        <div class="contents" :style="{'background': vendor.style.mainColor}">
+        <div class="contents" :style="{'background': vendor.style?.mainColor}">
             <home-button></home-button>
 
             <svg v-if="loggedIn" @click="showSettings" class="settingsIcon" width="30px" height="30px" stroke-width="1.5" viewBox="0 0 24 24" fill="none" color="#000000">
@@ -132,7 +132,7 @@
 
             <h1>{{vendor.name}}</h1>
 
-            <div v-if="vendor.photos.length > 0" class="vendorPhotos" ref="photoContainer">
+            <div v-if="vendor.photos?.length > 0" class="vendorPhotos" ref="photoContainer">
                 <img
                     v-for="(photo, i) in vendor.photos"
                     ref="vendorPhoto"
@@ -201,7 +201,7 @@ export default {
                 }, 5000);
 
                 let maxPhotoSize = 0;
-                for(let i = 0; i < this.$refs.vendorPhoto.length; i++){
+                for(let i = 0; i < this.$refs.vendorPhoto?.length; i++){
                     this.$refs.vendorPhoto[i].onload = ()=>{
                         if(this.$refs.vendorPhoto[i].height > maxPhotoSize) maxPhotoSize = this.$refs.vendorPhoto[i].height;
                         this.$refs.vendorPhoto[i].style.marginLeft = `-${this.$refs.vendorPhoto[i].width / 2}px`;

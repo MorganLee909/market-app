@@ -142,7 +142,8 @@ export default {
             this.currentSetting = setting;
         },
         logout(){
-            localStorage.setItem("jwt", "");
+            localStorage.removeItem("jwt");
+            localStorage.removeItem("vendorUrl");
             this.$router.push("/");
         }
     }
