@@ -225,7 +225,7 @@ export default {
             this.banner.displayed = false;
         },
         copyUrl(){
-            navigator.clipboard.writeText(`https://market.com/${this.vendor.url}`);
+            navigator.clipboard.writeText(`https://myvillage.market/${this.vendor.url}`);
             this.showBanner("success", "URL copied to clipboard");
         },
         timeFromMinutes(num){

@@ -16,11 +16,11 @@ export default {
         justify-content: center;
         position: fixed;
         top: 0;
-        left: 0;
+        left: 50%;
+        transform: translate(-50%, 0);
         z-index: 200;
         box-sizing: border-box;
         height: 50px;
-        width: 100vw;
         margin: 15px 0;
     }
 
