@@ -132,7 +132,7 @@
 
             <h1>{{vendor.name}}</h1>
 
-            <div class="vendorPhotos" ref="photoContainer">
+            <div v-if="vendor.photos.length > 0" class="vendorPhotos" ref="photoContainer">
                 <img
                     v-for="(photo, i) in vendor.photos"
                     ref="vendorPhoto"
