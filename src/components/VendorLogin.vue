@@ -46,6 +46,7 @@ export default {
                         this.$emit("banner", "error", response);
                     }else{
                         localStorage.setItem("jwt", response.jwt);
+                        localStorage.setItem("vendorUrl", response.vendor.url);
                         this.$router.push(`/${response.vendor.url}`);
                     }
                 })

@@ -73,7 +73,12 @@ export default {
             this.modals.vendorReg = !this.modals.vendorReg;
         },
         displayLogin: function(){
-            this.modals.vendorLogin = !this.modals.vendorLogin;
+            let vendorRoute = localStorage.getItem("vendorUrl");
+            if(vendorRoute){
+                this.$router.push(`/${vendorRoute}`);
+            }else{
+                this.modals.vendorLogin = !this.modals.vendorLogin;
+            }
         },
         closeModal: function(){
             this.modals.vendorReg = false;
