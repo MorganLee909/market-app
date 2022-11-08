@@ -121,12 +121,12 @@ export default {
 }
 
 .newProductBtn:hover{
-    background: var(--alteredSecondaryColor);
+    background: none;
+    color: var(--secondaryColor);
+    border: 2px solid var(--secondaryColor);
 }
 
 .newProductBtn:active{
-    background: none;
-    color: var(--secondaryColor);
     border: 1px solid var(--secondaryColor);
 }
 

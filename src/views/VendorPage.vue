@@ -205,7 +205,11 @@ export default {
                     this.$refs.vendorPhoto[i].onload = ()=>{
                         if(this.$refs.vendorPhoto[i].height > maxPhotoSize) maxPhotoSize = this.$refs.vendorPhoto[i].height;
                         this.$refs.vendorPhoto[i].style.marginLeft = `-${this.$refs.vendorPhoto[i].width / 2}px`;
-                        if(i === this.$refs.vendorPhoto.length - 1) this.$refs.photoContainer.style.height = `${maxPhotoSize}px`;
+                        if(i === this.$refs.vendorPhoto.length - 1){
+                            setTimeout(()=>{
+                                this.$refs.photoContainer.style.height = `${maxPhotoSize}px`;
+                            }, 5000);
+                        }
                     }
                 }
             },
@@ -254,7 +258,6 @@ export default {
                     if(typeof(response) === "response"){
                         this.showBanner("error", response)
                     }else{
-                        console.log(response);
                         this.loggedIn = response.loggedIn;
                         this.vendor = response.vendor;
                     }
@@ -364,7 +367,7 @@ export default {
     display: flex;
     justify-content: center;
     position: relative;
-    min-height: 70vh;
+    height: auto;
     width: 100%;
 }
 
@@ -402,6 +405,9 @@ export default {
 }
 
 @media screen and (max-width: 1400px){
+    .vendorPhotos{
+        min-height: 0;
+    }
     .vendorPhoto{
         height: initial;
         width: 100%;

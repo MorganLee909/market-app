@@ -68,7 +68,6 @@ export default {
 
     methods: {
         displayRegister: function(){
-            console.log("something");
             this.modals.vendorLogin = false;
             this.modals.vendorReg = !this.modals.vendorReg;
         },

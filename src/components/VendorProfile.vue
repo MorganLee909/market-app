@@ -32,7 +32,7 @@
             <input name="url" type="text" v-model="compVendor.url"/>
         </label>
 
-        <label>Photos
+        <label>Photos (replaces all photos, maximum 5)
             <input name="images" type="file" multiple/>
         </label>
 
@@ -116,6 +116,8 @@
 export default {
     props: ["vendor"],
 
+    emits: ["updateVendor"],
+
     data(){
         return {
             banner: {
@@ -145,6 +147,7 @@ export default {
                         this.showBanner("error", response);
                     }else{
                         this.compVendor = response;
+                        this.$emit("updateVendor", response);
                         this.showBanner("success", "Profile data saved");
                     }
                 })

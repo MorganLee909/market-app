@@ -82,6 +82,7 @@
                 <vendor-profile
                     v-if="currentSetting === 'profile'"
                     :vendor="this.compVendor"
+                    @updateVendor="this.updateVendor"
                 ></vendor-profile>
 
                 <vendor-privacy
