@@ -14,6 +14,8 @@
 
     <div class="container" :style="{'color': vendor.style?.textColor}">
         <div class="sidebar" :style="{'background': vendor.style?.secondaryColor}">
+            <home-button id="mobileHomeButton"></home-button>
+
             <h1>{{vendor.name}}</h1>
 
             <div class="sidebarDetail" v-if="vendor.email">
@@ -123,7 +125,7 @@
         </div>
 
         <div class="contents" :style="{'background': vendor.style?.mainColor}">
-            <home-button></home-button>
+            <home-button class="mainHomeBtn"></home-button>
 
             <svg v-if="loggedIn" @click="showSettings" class="settingsIcon" width="30px" height="30px" stroke-width="1.5" viewBox="0 0 24 24" fill="none" color="#000000">
                 <path d="M12 15a3 3 0 100-6 3 3 0 000 6z" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -199,19 +201,6 @@ export default {
                 this.photoInterval = setInterval(()=>{
                     this.displayedPhoto = (this.displayedPhoto + 1) % photoCount;
                 }, 5000);
-
-                let maxPhotoSize = 0;
-                for(let i = 0; i < this.$refs.vendorPhoto?.length; i++){
-                    this.$refs.vendorPhoto[i].onload = ()=>{
-                        if(this.$refs.vendorPhoto[i].height > maxPhotoSize) maxPhotoSize = this.$refs.vendorPhoto[i].height;
-                        this.$refs.vendorPhoto[i].style.marginLeft = `-${this.$refs.vendorPhoto[i].width / 2}px`;
-                        if(i === this.$refs.vendorPhoto.length - 1){
-                            setTimeout(()=>{
-                                this.$refs.photoContainer.style.height = `${maxPhotoSize}px`;
-                            }, 5000);
-                        }
-                    }
-                }
             },
             flush: "post"
         }
@@ -291,6 +280,10 @@ export default {
     background: var(--secondaryColor);
 }
 
+#mobileHomeButton{
+    display: none;
+}
+
 .sidebar h1{
     margin-bottom: 15px;
 }
@@ -343,7 +336,6 @@ export default {
     flex-direction: column;
     align-items: center;
     padding: 35px;
-    position: relative;
     overflow-y: auto;
     height: 100vh;
     box-sizing: border-box;
@@ -366,15 +358,16 @@ export default {
 .vendorPhotos{
     display: flex;
     justify-content: center;
+    flex-shrink: 0;
     position: relative;
-    height: auto;
-    width: 100%;
+    height: 563px;
+    width: 750px;
 }
 
 .vendorPhoto{
     position: absolute;
     top: 0;
-    left: 50%;
+    left: 0;
     transition: opacity 2s;
     height: 100%;
 }
@@ -404,17 +397,12 @@ export default {
     margin-right: auto;
 }
 
-@media screen and (max-width: 1400px){
-    .vendorPhotos{
-        min-height: 0;
-    }
-    .vendorPhoto{
-        height: initial;
-        width: 100%;
-    }
-}
-
 @media screen and (max-width: 1200px){
+    .vendorPhotos{
+        height: 375px;
+        width: 500px;
+    }
+
     .sidebar{
         width: 300px;
         padding: 5px;
@@ -455,6 +443,21 @@ export default {
 }
 
 @media screen and (max-width: 600px){
+    .mainHomeBtn{
+        display: none;
+    }
+
+    #mobileHomeButton{
+        display: flex;
+        top: 10px;
+        left: 10px;
+    }
+
+    .vendorPhotos{
+        height: 240px;
+        width: 320px;
+    }
+
     .contents{
         padding: 5px;
     }
