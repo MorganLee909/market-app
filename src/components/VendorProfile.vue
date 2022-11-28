@@ -42,70 +42,70 @@
             <h3>Sunday</h3>
             <div class="openClose">
                 <label>Open
-                    <input ref="sunOpen" type="time" :value="toHumanTime(compVendor.hours.sunday.open)"/>
+                    <input ref="sunOpen" type="time" :value="toHumanTime(compVendor.hours?.sunday.open)" required/>
                 </label>
                 <label>Close
-                    <input ref="sunClose" type="time" :value="toHumanTime(compVendor.hours.sunday.close)"/>
+                    <input ref="sunClose" type="time" :value="toHumanTime(compVendor.hours?.sunday.close)" required/>
                 </label>
             </div>
 
             <h3>Monday</h3>
             <div class="openClose">
                 <label>Open
-                    <input ref="monOpen" type="time" :value="toHumanTime(compVendor.hours.monday.open)"/>
+                    <input ref="monOpen" type="time" :value="toHumanTime(compVendor.hours?.monday.open)" required/>
                 </label>
                 <label>Close
-                    <input ref="monClose" type="time" :value="toHumanTime(compVendor.hours.monday.close)"/>
+                    <input ref="monClose" type="time" :value="toHumanTime(compVendor.hours?.monday.close)" required/>
                 </label>
             </div>
 
             <h3>Tuesday</h3>
             <div class="openClose">
                 <label>Open
-                    <input ref="tueOpen" type="time" :value="toHumanTime(compVendor.hours.tuesday.open)"/>
+                    <input ref="tueOpen" type="time" :value="toHumanTime(compVendor.hours?.tuesday.open)" required/>
                 </label>
                 <label>Close
-                    <input ref="tueClose" type="time" :value="toHumanTime(compVendor.hours.tuesday.close)"/>
+                    <input ref="tueClose" type="time" :value="toHumanTime(compVendor.hours?.tuesday.close)" required/>
                 </label>
             </div>
 
             <h3>Wednesday</h3>
             <div class="openClose">
                 <label>Open
-                    <input ref="wedOpen" type="time" :value="toHumanTime(compVendor.hours.wednesday.open)"/>
+                    <input ref="wedOpen" type="time" :value="toHumanTime(compVendor.hours?.wednesday.open)" required/>
                 </label>
                 <label>Close
-                    <input ref="wedClose" type="time" :value="toHumanTime(compVendor.hours.wednesday.close)"/>
+                    <input ref="wedClose" type="time" :value="toHumanTime(compVendor.hours?.wednesday.close)" required/>
                 </label>
             </div>
 
             <h3>Thursday</h3>
             <div class="openClose">
                 <label>Open
-                    <input ref="thuOpen" type="time" :value="toHumanTime(compVendor.hours.thursday.open)"/>
+                    <input ref="thuOpen" type="time" :value="toHumanTime(compVendor.hours?.thursday.open)" required/>
                 </label>
                 <label>Close
-                    <input ref="thuClose" type="time" :value="toHumanTime(compVendor.hours.thursday.close)"/>
+                    <input ref="thuClose" type="time" :value="toHumanTime(compVendor.hours?.thursday.close)" required/>
                 </label>
             </div>
 
             <h3>Friday</h3>
             <div class="openClose">
                 <label>Open
-                    <input ref="friOpen" type="time" :value="toHumanTime(compVendor.hours.friday.open)"/>
+                    <input ref="friOpen" type="time" :value="toHumanTime(compVendor.hours?.friday.open)" required/>
                 </label>
                 <label>Close
-                    <input ref="friClose" type="time" :value="toHumanTime(compVendor.hours.friday.close)"/>
+                    <input ref="friClose" type="time" :value="toHumanTime(compVendor.hours?.friday.close)" required/>
                 </label>
             </div>
             
             <h3>Saturday</h3>
             <div class="openClose">
                 <label>Open
-                    <input ref="satOpen" type="time" :value="toHumanTime(compVendor.hours.saturday.open)"/>
+                    <input ref="satOpen" type="time" :value="toHumanTime(compVendor.hours?.saturday.open)" required/>
                 </label>
                 <label>Close
-                    <input ref="satClose" type="time" :value="toHumanTime(compVendor.hours.saturday.close)"/>
+                    <input ref="satClose" type="time" :value="toHumanTime(compVendor.hours?.saturday.close)" required/>
                 </label>
             </div>
         </div>
@@ -195,6 +195,7 @@ export default {
             }
         },
         toHumanTime(time){
+            if(time === null) return null;
             let hours = Math.floor(time / 60);
             hours = hours < 10 ? `0${hours}` : `${hours}`;
             let minutes = time % 60;

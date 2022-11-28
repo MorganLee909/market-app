@@ -68,7 +68,7 @@
 
                 <div
                     class="day"
-                    v-if="vendor.hours?.sunday && vendor.hours?.sunday.open !== 0"
+                    v-if="vendor.hours?.sunday && vendor.hours?.sunday.open !== null"
                 >
                     <p class="dayName">Sunday:</p>
                     <p class="time">{{timeFromMinutes(vendor.hours?.sunday.open)}} - {{timeFromMinutes(vendor.hours?.sunday.close)}}</p>
@@ -76,7 +76,7 @@
 
                 <div
                     class="day"
-                    v-if="vendor.hours?.monday && vendor.hours?.monday.open !== 0"
+                    v-if="vendor.hours?.monday && vendor.hours?.monday.open !== null"
                 >
                     <p class="dayName">Monday:</p>
                     <p class="time">{{timeFromMinutes(vendor.hours?.monday.open)}} - {{timeFromMinutes(vendor.hours?.monday.close)}}</p>
@@ -84,7 +84,7 @@
 
                 <div
                     class="day"
-                    v-if="vendor.hours?.tuesday && vendor.hours?.tuesday.open !== 0"
+                    v-if="vendor.hours?.tuesday && vendor.hours?.tuesday.open !== null"
                 >
                     <p class="dayName">Tuesday:</p>
                     <p class="time">{{timeFromMinutes(vendor.hours?.tuesday.open)}} - {{timeFromMinutes(vendor.hours?.tuesday.close)}}</p>
@@ -92,7 +92,7 @@
 
                 <div
                     class="day"
-                    v-if="vendor.hours?.wednesday && vendor.hours?.wednesday.open !== 0"
+                    v-if="vendor.hours?.wednesday && vendor.hours?.wednesday.open !== null"
                 >
                     <p class="dayName">Wednesday:</p>
                     <p class="time">{{timeFromMinutes(vendor.hours?.wednesday.open)}} - {{timeFromMinutes(vendor.hours?.wednesday.close)}}</p>
@@ -100,7 +100,7 @@
 
                 <div
                     class="day"
-                    v-if="vendor.hours?.thursday && vendor.hours?.thursday.open !== 0"
+                    v-if="vendor.hours?.thursday && vendor.hours?.thursday.open !== null"
                 >
                     <p class="dayName">Thursday:</p>
                     <p class="time">{{timeFromMinutes(vendor.hours?.thursday.open)}} - {{timeFromMinutes(vendor.hours?.thursday.close)}}</p>
@@ -108,7 +108,7 @@
 
                 <div
                     class="day"
-                    v-if="vendor.hours?.friday && vendor.hours?.friday.open !== 0"
+                    v-if="vendor.hours?.friday && vendor.hours?.friday.open !== null"
                 >
                     <p class="dayName">Friday:</p>
                     <p class="time">{{timeFromMinutes(vendor.hours?.friday.open)}} - {{timeFromMinutes(vendor.hours?.friday.close)}}</p>
@@ -116,7 +116,7 @@
 
                 <div
                     class="day"
-                    v-if="vendor.hours?.saturday && vendor.hours?.saturday.open !== 0"
+                    v-if="vendor.hours?.saturday && vendor.hours?.saturday.open !== null"
                 >
                     <p class="dayName">Saturday</p>
                     <p class="time">{{timeFromMinutes(vendor.hours?.saturday.open)}} - {{timeFromMinutes(vendor.hours?.saturday.close)}}</p>
@@ -222,6 +222,7 @@ export default {
             this.showBanner("success", "URL copied to clipboard");
         },
         timeFromMinutes(num){
+            if(num === null) return null;
             let hours = Math.floor(num / 60);
             let minutes = num % 60;
             if(minutes < 10) minutes = `${minutes}0`;
