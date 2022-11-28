@@ -15,7 +15,7 @@
         </div>
     </div>
 
-    <form @submit="submit">    
+    <form ref="products" @submit="submit">
         <editable-product
             v-for="product in compProducts"
             :product="product"
@@ -42,7 +42,7 @@ export default {
                 type: "",
                 message: ""
             },
-            compProducts: this.products
+            compProducts: JSON.parse(JSON.stringify(this.products))
         }
     },
 
