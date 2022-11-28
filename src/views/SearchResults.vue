@@ -8,7 +8,11 @@
     <home-button></home-button>
 
     <div class="container">
-        <h1>Vendors in your area</h1>
+        <h1>Vendors in your area:</h1>
+
+        <h3>{{address}}</h3>
+
+        <h2 v-if="vendors.length === 0">Sorry, no vendors were located in your area. Try increasing search distance.</h2>
 
         <div class="vendors">
             <vendor-search-result
@@ -37,23 +41,14 @@ export default{
                 type: "",
                 message: ""
             },
-            vendors: []
+            vendors: [],
+            address: ""
         }
     },
 
     created(){
-        fetch(`http://localhost:8000/vendor/search?address=${this.$route.query.address}&distance=${this.$route.query.distance}`)
-            .then(r=>r.json())
-            .then((response)=>{
-                if(typeof(response) === "string"){
-                    this.showBanner("error", response);
-                }else{
-                    this.vendors = response;
-                }
-            })
-            .catch((err)=>{
-                this.showBanner("error", "Something went wrong. Try refreshing the page.");
-            });
+        let address = this.$route.query.address.replaceAll("+", " ");
+        this.searchVendors(address, this.$route.query.distance);
     },
 
     methods: {
@@ -63,6 +58,22 @@ export default{
             this.banner.displayed = true;
 
             setTimeout(()=>{this.banner.displayed = false}, 5000);
+        },
+        searchVendors: function(address, distance){
+            let formattedAddress = address.replaceAll(" ", "+");
+            fetch(`http://localhost:8000/vendor/search?address=${formattedAddress}&distance=${distance}`)
+                .then(r=>r.json())
+                .then((response)=>{
+                    if(typeof(response) === "string"){
+                        this.showBanner("error", response);
+                    }else{
+                        this.vendors = response.vendors;
+                        this.address = response.address;
+                    }
+                })
+                .catch((err)=>{
+                    this.showBanner("error", "Something went wrong. Try refreshing the page.");
+                });
         }
     }
 }
@@ -79,9 +90,17 @@ export default{
 }
 
 .container h1{
-    margin-bottom: 35px;
     font-size: 35px;
     text-align: center;
+}
+
+.container h2{
+    font-size: 35px;
+    color: red;
+}
+
+.container h3{
+    margin-bottom: 35px;
 }
 
 @media screen and (max-width: 800px){
