@@ -340,6 +340,7 @@ export default {
     height: 100vh;
     box-sizing: border-box;
     position: relative;
+    flex-grow: 1;
 }
 
 .settingsIcon{
