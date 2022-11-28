@@ -5,7 +5,7 @@
         :message="banner.message"
     ></notification-banner>
 
-    <home-button></home-button>
+    <home-button id="homeButton"></home-button>
 
     <div class="container">
         <h1>Vendors in your area:</h1>
@@ -14,6 +14,7 @@
 
         <div class="search">
             <search-bar
+                id="searchBar"
                 ref="searchBar"
                 @search="search"
             ></search-bar>
@@ -131,6 +132,7 @@ export default{
 
 .container h3{
     margin-bottom: 35px;
+    text-align: center;
 }
 
 .search{
@@ -138,9 +140,36 @@ export default{
     align-items: center;
 }
 
-@media screen and (max-width: 800px){
+.vendors{
+    min-width: 750px;
+}
+
+@media screen and (max-width: 850px){
     .vendors{
         width: 100%;
+        min-width: 0;
+    }
+
+    .search{
+        flex-direction: column;
+    }
+
+    .container h3{
+        margin-bottom: 10px;
+    }
+
+    #searchBar{
+        padding: 0;
+    }
+}
+
+@media screen and (max-width: 550px){
+    #homeButton{
+        top: 15px;
+        left: 15px;
+    }
+    .container h1{
+        margin-top: 20px;
     }
 }
 </style>
