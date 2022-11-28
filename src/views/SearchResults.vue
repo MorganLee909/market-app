@@ -14,14 +14,15 @@
 
         <div class="search">
             <search-bar
-                @banner="showBanner"
+                ref="searchBar"
+                @search="search"
             ></search-bar>
 
-            <button class="actionButton" @click="searchAgain">Search Again</button>
+            <button class="actionButton" @click="this.$refs.searchBar.search">Search Again</button>
         </div>
 
 
-        <h2 v-if="vendors.length === 0">Sorry, no vendors were located in your area. Try increasing search distance.</h2>
+        <h2 v-if="vendors.length === 0">{{noVendorsText}}</h2>
 
         <div class="vendors">
             <vendor-search-result
@@ -53,50 +54,48 @@ export default{
                 message: ""
             },
             vendors: [],
-            address: ""
+            address: "",
+            noVendorsText: "Searching..."
         }
     },
 
     created(){
-        fetch(`http://localhost:8000/vendor/search?address=${this.$route.query.address}&distance=${this.$route.query.distance}`)
-            .then(r=>r.json())
-            .then((response)=>{
-                if(typeof(response) === "string"){
-                    this.showBanner("error", response);
-                }else{
-                    this.vendors = response.vendors;
-                    this.address = response.address;
-                }
-            })
-            .catch((err)=>{
-                this.showBanner("error", "Something went wrong. Try refreshing the page.");
-            });
+        this.search(
+            this.$route.query.address,
+            this.$route.query.distance,
+            null
+        );
     },
 
     methods: {
-        searchAgain: function(){
-            let address = this.$refs.address.value;
-            let distance = this.$refs.distance.value;
-            let unit = this.$refs.unit.value;
-
+        search: function(address, distance, unit){
+            this.noVendorsText = "Searching..."
             if(address === ""){
                 this.showBanner("error", "Address bar cannot be empty");
                 return;
             }
-
-            switch(unit){
-                case "km": distance *= 1000; break;
-                case "mi": distance *= 1609.34; break;
+            address = address.replaceAll(" ", "+");
+            if(unit){
+                switch(unit){
+                    case "km": distance *= 1000; break;
+                    case "mi": distance *= 1609.34; break;
+                }
             }
 
-            address = address.replaceAll(" ", "+");
-            this.$router.push({
-                path: "/search",
-                query: {
-                    address: address,
-                    distance: distance
-                }
-            });
+            fetch(`http://localhost:8000/vendor/search?address=${address}&distance=${distance}`)
+                .then(r=>r.json())
+                .then((response)=>{
+                    if(typeof(response) === "string"){
+                        this.showBanner("error", response);
+                    }else{
+                        this.vendors = response.vendors;
+                        this.address = response.address;
+                        if(this.vendors.length === 0) this.noVendorsText = "Sorry, no vendors were located in your area. Try increasing search distance.";
+                    }
+                })
+                .catch((err)=>{
+                    this.showBanner("error", "Something went wrong. Try refreshing the page.");
+                });
         },
         showBanner: function(type, message){
             this.banner.type = type;
@@ -127,6 +126,7 @@ export default{
 .container h2{
     font-size: 35px;
     color: red;
+    margin-top: 100px;
 }
 
 .container h3{

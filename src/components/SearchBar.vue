@@ -1,9 +1,9 @@
 <template>
-    <form class="searchBar" @submit.prevent="search()">
+    <form class="searchBar" @submit.prevent="search">
         <input type="text" ref="address" placeholder="ADDRESS" required/>
 
         <div class="distanceContainer">
-            <input type="number" min="1" step="1" ref="distance" value="25" required/>
+            <input class="distance" type="number" min="1" step="1" ref="distance" value="25" required/>
 
             <select ref="unit" required>
                 <option value="mi" default>Miles</option>
@@ -17,36 +17,20 @@
 
 <script>
 export default {
-    emits: ["banner"],
+    emits: ["search"],
 
     mounted(){
         this.$refs.address.focus();
     },
 
     methods: {
-        search(){
-            let address = this.$refs.address.value;
-            let distance = this.$refs.distance.value;
-            let unit = this.$refs.unit.value;
-
-            if(address === ""){
-                this.$emit("banner", "error", "Address bar cannot be empty");
-                return;
-            }
-
-            switch(unit){
-                case "km": distance *= 1000; break;
-                case "mi": distance *= 1609.34; break;
-            }
-
-            address = address.replaceAll(" ", "+");
-            this.$router.push({
-                path: "/search",
-                query: {
-                    address: address,
-                    distance: distance
-                }
-            });
+        search: function(){
+            this.$emit(
+                "search",
+                this.$refs.address.value,
+                this.$refs.distance.value,
+                this.$refs.unit.value
+            );
         }
     }
 }
@@ -69,6 +53,10 @@ input, select{
 
 input[type="number"]{
     width: 75px;
+}
+
+.distance{
+    padding-left: 10px;
 }
 
 @media screen and (max-width: 800px){

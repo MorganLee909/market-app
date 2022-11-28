@@ -24,7 +24,7 @@
         <h1>My Village Market</h1>
 
         <search-bar
-            @banner="showBanner"
+            @search="search"
         ></search-bar>
 
         <button class="actionButton" @click="search">FIND LOCAL</button>
@@ -67,6 +67,26 @@ export default {
             }else{
                 this.modals.vendorLogin = !this.modals.vendorLogin;
             }
+        },
+        search(address, distance, unit){
+            if(address === ""){
+                this.showBanner("error", "Address bar cannot be empty");
+                return;
+            }
+
+            switch(unit){
+                case "km": distance *= 1000; break;
+                case "mi": distance *= 1609.34; break;
+            }
+
+            address = address.replaceAll(" ", "+");
+            this.$router.push({
+                path: "/search",
+                query: {
+                    address: address,
+                    distance: distance
+                }
+            });
         },
         closeModal: function(){
             this.modals.vendorReg = false;
