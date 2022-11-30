@@ -48,12 +48,7 @@
 
                 <p v-if="loggedIn">{{vendor.address?.full}}</p>
 
-                <div class="noVendorAddress" v-else>
-                    <p v-if="vendor.address?.streetNumber">{{vendor.address.streetNumber}}</p>
-                    <p v-if="vendor.address?.road">{{vendor.address.road}},</p>
-                    <p v-if="vendor.address?.city">{{vendor.address.city}},</p>
-                    <p v-if="vendor.address?.state">{{vendor.address.state}}</p>
-                </div>
+                <p class="noVendorAddress" v-else>{{getAddress()}}</p>
             </div>
 
             <div class="hours">
@@ -265,6 +260,15 @@ export default {
         },
         updateVendor(vendor){
             this.vendor = vendor;
+        },
+        getAddress(){
+            let address = "";
+            address += this.vendor.address?.streetNumber ? ` ${this.vendor.address.streetNumber}` : "";
+            address += this.vendor.address?.road ? ` ${this.vendor.address.road},` : "";
+            address += this.vendor.address?.city ? ` ${this.vendor.address.city},` : "";
+            address += this.vendor.address?.state ? ` ${this.vendor.address.state}` : "";
+
+            return address === "" ? "Address is private" : address;
         }
     }
 }
