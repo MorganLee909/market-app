@@ -125,7 +125,7 @@ export default {
                 type: "",
                 message: ""
             },
-            compVendor: this.vendor
+            compVendor: JSON.parse(JSON.stringify(this.vendor))
         }
     },
 
