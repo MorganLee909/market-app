@@ -197,7 +197,7 @@ export default {
     watch: {
         vendor: {
             handler(newData, oldData){
-                let photoCount = this.vendor.photos.length - 1;
+                let photoCount = this.vendor.photos.length;
                 this.photoInterval = setInterval(()=>{
                     this.displayedPhoto = (this.displayedPhoto + 1) % photoCount;
                 }, 5000);

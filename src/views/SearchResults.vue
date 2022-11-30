@@ -22,7 +22,6 @@
             <button class="actionButton" @click="this.$refs.searchBar.search">Search Again</button>
         </div>
 
-
         <h2 v-if="vendors.length === 0">{{noVendorsText}}</h2>
 
         <div class="vendors">
