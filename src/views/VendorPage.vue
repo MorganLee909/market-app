@@ -225,8 +225,15 @@ export default {
             if(num === null) return null;
             let hours = Math.floor(num / 60);
             let minutes = num % 60;
+            let meridian = "";
+            if(hours > 12){
+                hours -= 12;
+                meridian = "pm";
+            }else{
+                meridian = "am"
+            }
             if(minutes < 10) minutes = `${minutes}0`;
-            return `${hours}:${minutes}`;
+            return `${hours}:${minutes} ${meridian}`;
         },
         showSettings(){
             this.displaySettings = true;
