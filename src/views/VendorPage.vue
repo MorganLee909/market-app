@@ -16,7 +16,7 @@
         <div class="sidebar" :style="{'background': vendor.style?.secondaryColor}">
             <home-button
                 id="mobileHomeButton"
-                :style="vendor.style"    
+                :color="vendor.style"    
             ></home-button>
 
             <h1>{{vendor.name}}</h1>
@@ -125,7 +125,7 @@
         <div class="contents" :style="{'background': vendor.style?.mainColor}">
             <home-button
                 class="mainHomeBtn"
-                :style="vendor.style"
+                :color="vendor.style"
             ></home-button>
 
             <svg v-if="loggedIn" @click="showSettings" class="settingsIcon" width="30px" height="30px" stroke-width="1.5" viewBox="0 0 24 24" fill="none" color="#000000">

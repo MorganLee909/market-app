@@ -5,7 +5,10 @@
         :message="banner.message"
     ></notification-banner>
 
-    <home-button id="homeButton"></home-button>
+    <home-button
+        id="homeButton"
+        color="#000000"   
+    ></home-button>
 
     <div class="container">
         <h1>Vendors in your area:</h1>
