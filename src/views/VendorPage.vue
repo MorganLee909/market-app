@@ -14,14 +14,17 @@
 
     <div class="container" :style="{'color': vendor.style?.textColor}">
         <div class="sidebar" :style="{'background': vendor.style?.secondaryColor}">
-            <home-button id="mobileHomeButton"></home-button>
+            <home-button
+                id="mobileHomeButton"
+                :style="vendor.style"    
+            ></home-button>
 
             <h1>{{vendor.name}}</h1>
 
             <div class="sidebarDetail" v-if="vendor.email">
                 <svg width="20px" height="20px" stroke-width="1.5" viewBox="0 0 24 24" fill="none" color="#000000">
-                    <path d="M7 12l5 3.5 5-3.5" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                    <path d="M2 20V9.132a2 2 0 01.971-1.715l8-4.8a2 2 0 012.058 0l8 4.8A2 2 0 0122 9.132V20a2 2 0 01-2 2H4a2 2 0 01-2-2z" stroke="#ffffff" stroke-width="1.5"></path>
+                    <path d="M7 12l5 3.5 5-3.5" :stroke="vendor.style.textColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                    <path d="M2 20V9.132a2 2 0 01.971-1.715l8-4.8a2 2 0 012.058 0l8 4.8A2 2 0 0122 9.132V20a2 2 0 01-2 2H4a2 2 0 01-2-2z" :stroke="vendor.style.textColor" stroke-width="2"></path>
                 </svg>
 
                 <p>{{vendor.email}}</p>
@@ -29,21 +32,21 @@
             
             <div class="sidebarDetail">
                 <svg width="20px" height="20px" stroke-width="1.5" viewBox="0 0 24 24" fill="none" color="#000000">
-                    <path d="M3.338 17A9.996 9.996 0 0012 22a9.996 9.996 0 008.662-5M3.338 7A9.996 9.996 0 0112 2a9.996 9.996 0 018.662 5M13 21.95s1.408-1.853 2.295-4.95M13 2.05S14.408 3.902 15.295 7M11 21.95S9.592 20.098 8.705 17M11 2.05S9.592 3.902 8.705 7M9 10l1.5 5 1.5-5 1.5 5 1.5-5M1 10l1.5 5L4 10l1.5 5L7 10M17 10l1.5 5 1.5-5 1.5 5 1.5-5" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                    <path d="M3.338 17A9.996 9.996 0 0012 22a9.996 9.996 0 008.662-5M3.338 7A9.996 9.996 0 0112 2a9.996 9.996 0 018.662 5M13 21.95s1.408-1.853 2.295-4.95M13 2.05S14.408 3.902 15.295 7M11 21.95S9.592 20.098 8.705 17M11 2.05S9.592 3.902 8.705 7M9 10l1.5 5 1.5-5 1.5 5 1.5-5M1 10l1.5 5L4 10l1.5 5L7 10M17 10l1.5 5 1.5-5 1.5 5 1.5-5" :stroke="vendor.style.textColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
                 </svg>
 
                 <p>myvillage.market/{{vendor.url}}</p>
 
                 <svg class="urlClick" @click="copyUrl" width="24px" height="24px" stroke-width="1.5" viewBox="0 0 24 24" fill="none" color="#000000">
-                    <path d="M19.4 20H9.6a.6.6 0 01-.6-.6V9.6a.6.6 0 01.6-.6h9.8a.6.6 0 01.6.6v9.8a.6.6 0 01-.6.6z" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                    <path d="M15 9V4.6a.6.6 0 00-.6-.6H4.6a.6.6 0 00-.6.6v9.8a.6.6 0 00.6.6H9" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                    <path d="M19.4 20H9.6a.6.6 0 01-.6-.6V9.6a.6.6 0 01.6-.6h9.8a.6.6 0 01.6.6v9.8a.6.6 0 01-.6.6z" :stroke="vendor.style.textColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                    <path d="M15 9V4.6a.6.6 0 00-.6-.6H4.6a.6.6 0 00-.6.6v9.8a.6.6 0 00.6.6H9" :stroke="vendor.style.textColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
                 </svg>
             </div>
 
             <div class="sidebarDetail">
                 <svg width="20px" height="20px" stroke-width="1.5" viewBox="0 0 24 24" fill="none" color="#000000">
-                    <path d="M20 10c0 4.418-8 12-8 12s-8-7.582-8-12a8 8 0 1116 0z" stroke="#ffffff" stroke-width="1.5"></path>
-                    <path d="M12 11a1 1 0 100-2 1 1 0 000 2z" fill="#000000" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                    <path d="M20 10c0 4.418-8 12-8 12s-8-7.582-8-12a8 8 0 1116 0z" :stroke="vendor.style.textColor" stroke-width="1.5"></path>
+                    <path d="M12 11a1 1 0 100-2 1 1 0 000 2z" fill="#000000" :stroke="vendor.style.textColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
                 </svg>
 
                 <p v-if="loggedIn">{{vendor.address?.full}}</p>
@@ -54,8 +57,8 @@
             <div class="hours">
                 <div class="sidebarDetail">
                     <svg width="20px" height="20px" stroke-width="1.5" viewBox="0 0 24 24" fill="none" color="#000000">
-                        <path d="M12 6v6h6" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                        <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                        <path d="M12 6v6h6" :stroke="vendor.style.textColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                        <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z" :stroke="vendor.style.textColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
 
                     <p>Hours</p>
@@ -120,11 +123,14 @@
         </div>
 
         <div class="contents" :style="{'background': vendor.style?.mainColor}">
-            <home-button class="mainHomeBtn"></home-button>
+            <home-button
+                class="mainHomeBtn"
+                :style="vendor.style"
+            ></home-button>
 
             <svg v-if="loggedIn" @click="showSettings" class="settingsIcon" width="30px" height="30px" stroke-width="1.5" viewBox="0 0 24 24" fill="none" color="#000000">
-                <path d="M12 15a3 3 0 100-6 3 3 0 000 6z" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                <path d="M19.622 10.395l-1.097-2.65L20 6l-2-2-1.735 1.483-2.707-1.113L12.935 2h-1.954l-.632 2.401-2.645 1.115L6 4 4 6l1.453 1.789-1.08 2.657L2 11v2l2.401.655L5.516 16.3 4 18l2 2 1.791-1.46 2.606 1.072L11 22h2l.604-2.387 2.651-1.098C16.697 18.831 18 20 18 20l2-2-1.484-1.75 1.098-2.652 2.386-.62V11l-2.378-.605z" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                <path d="M12 15a3 3 0 100-6 3 3 0 000 6z" :stroke="vendor.style.textColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                <path d="M19.622 10.395l-1.097-2.65L20 6l-2-2-1.735 1.483-2.707-1.113L12.935 2h-1.954l-.632 2.401-2.645 1.115L6 4 4 6l1.453 1.789-1.08 2.657L2 11v2l2.401.655L5.516 16.3 4 18l2 2 1.791-1.46 2.606 1.072L11 22h2l.604-2.387 2.651-1.098C16.697 18.831 18 20 18 20l2-2-1.484-1.75 1.098-2.652 2.386-.62V11l-2.378-.605z" :stroke="vendor.style.textColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
             </svg>
 
             <h1>{{vendor.name}}</h1>
