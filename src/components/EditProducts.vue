@@ -64,7 +64,7 @@ export default {
                 }
             }
 
-            fetch("http://localhost:8000/vendor/product", {
+            fetch(`${this.$apiRoute}/vendor/product`, {
                 method: "put",
                 headers: {
                     "Content-Type": "application/json",

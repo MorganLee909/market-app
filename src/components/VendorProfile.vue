@@ -134,7 +134,7 @@ export default {
             let data = new FormData(this.$refs.profileForm);
             data.append("hours", JSON.stringify(this.formatHours()));
 
-            fetch("http://localhost:8000/vendor", {
+            fetch(`${this.$apiRoute}/vendor`, {
                 method: "put",
                 headers: {
                     "Authorization": `Bearer ${localStorage.getItem("jwt")}`

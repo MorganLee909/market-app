@@ -85,7 +85,7 @@ export default{
                 }
             }
 
-            fetch(`http://localhost:8000/vendor/search?address=${address}&distance=${distance}`)
+            fetch(`${this.$apiRoute}/vendor/search?address=${address}&distance=${distance}`)
                 .then(r=>r.json())
                 .then((response)=>{
                     if(typeof(response) === "string"){

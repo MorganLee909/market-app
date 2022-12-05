@@ -16,7 +16,7 @@
         <div class="sidebar" :style="{'background': vendor.style?.secondaryColor}">
             <home-button
                 id="mobileHomeButton"
-                :color="vendor.style.textColor"
+                :color="vendor.style?.textColor"
             ></home-button>
 
             <h1>{{vendor.name}}</h1>
@@ -125,7 +125,7 @@
         <div class="contents" :style="{'background': vendor.style?.mainColor}">
             <home-button
                 class="mainHomeBtn"
-                :color="vendor.style.textColor"
+                :color="vendor.style?.textColor"
             ></home-button>
 
             <svg v-if="loggedIn" @click="showSettings" class="settingsIcon" width="30px" height="30px" stroke-width="1.5" viewBox="0 0 24 24" fill="none" color="#000000">
@@ -140,7 +140,7 @@
                     v-for="(photo, i) in vendor.photos"
                     ref="vendorPhoto"
                     :key="i"
-                    :src="`http://localhost:8000${photo}`"
+                    :src="`${$apiRoute}${photo}`"
                     alt="Vendor provided image"
                     :class="i===displayedPhoto ? 'displayPhoto vendorPhoto' : 'hidePhoto vendorPhoto'"
                 />
@@ -247,7 +247,7 @@ export default {
             let headers = {"Content-Type": "application/json"};
             if(token !== null) headers["Authorization"] = `Bearer ${token}`;
 
-            fetch(`http://localhost:8000/vendor${document.location.pathname}`, {
+            fetch(`${this.$apiRoute}/vendor${document.location.pathname}`, {
                 method: "get",
                 headers: headers,
             })

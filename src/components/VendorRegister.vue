@@ -69,7 +69,7 @@ export default {
                 return;
             }
 
-            fetch("http://localhost:8000/vendor", {
+            fetch(`${this.$apiRoute}/vendor`, {
                 method: "post",
                 headers: {
                     "Content-Type": "application/json"

@@ -42,7 +42,7 @@ export default {
 
     methods: {
         submit(){
-            fetch("http://localhost:8000/vendor/style", {
+            fetch(`${this.$apiRoute}/vendor/style`, {
                 method: "put",
                 headers: {
                     "Content-Type": "application/json",

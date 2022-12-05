@@ -30,7 +30,7 @@ export default {
 
     methods: {
         submit: function(e){
-            fetch("http://localhost:8000/vendor/login", {
+            fetch(`${this.$apiRoute}/vendor/login`, {
                 method: "post",
                 headers: {
                     "Content-Type": "application/json"

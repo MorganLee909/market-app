@@ -70,7 +70,7 @@ export default {
 
     methods: {
         submit(){
-            fetch("http://localhost:8000/vendor/public", {
+            fetch(`${this.$apiRoute}/vendor/public`, {
                 method: "put",
                 headers: {
                     "Content-Type": "application/json",

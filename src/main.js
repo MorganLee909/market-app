@@ -7,6 +7,7 @@ import VendorLogin from "./components/VendorLogin.vue";
 import NotificationBanner from "./components/NotificationBanner.vue";
 
 const app = createApp(App);
+app.config.globalProperties.$apiRoute = "http://localhost:8000";
 
 app.use(router);
 
